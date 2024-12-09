@@ -1,0 +1,8 @@
+The problem was eventually traced to a caching issue.  Although the `tailwind.config.js` file was correctly configured and the directives were in place, it is possible that the browser or build process was caching an outdated version of the CSS.  The solution involved several steps:
+
+1. **Hard refresh:**  A hard refresh (Ctrl+Shift+R or Cmd+Shift+R) of the browser often clears the cache and forces the browser to download the latest CSS.
+2. **Clean and rebuild:** If the issue persists, running a clean build process (depending on your build tools, this might involve deleting the `dist` or `build` directory and rebuilding the project) can clear any cached assets.
+3. **Purge CSS:** Ensure that your build process includes purging the CSS to remove unused styles. This can reduce the CSS size and improve performance.  The exact implementation of purging depends on your build setup, but it's typically done using a plugin in your build tool (e.g., PurgeCSS with PostCSS).
+4. **Check for conflicting CSS:** If other CSS files are included, check for potential conflicts.  Tailwind's specificity might be overridden, leading to styles not being applied.
+5. **Inspect the generated CSS:** Examine the generated CSS file to confirm that the Tailwind classes are present and not being overridden by other rules.
+By taking these steps, we ensure that the browser is loading the most up-to-date version of the CSS, preventing any caching issues from interfering with Tailwind class application.
